@@ -1,0 +1,27 @@
+{
+  "name": "movie-trailer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FJHou/movie-trailer.git"
+  },
+  "keywords": [
+    "movie",
+    "tariler"
+  ],
+  "author": "hfj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FJHou/movie-trailer/issues"
+  },
+  "homepage": "https://github.com/FJHou/movie-trailer#readme",
+  "dependencies": {
+    "koa": "^2.5.1"
+  }
+}
