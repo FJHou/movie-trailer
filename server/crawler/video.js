@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer')
 
-const url = `https://movie.douban.com/subject/`
+const base = `https://movie.douban.com/subject/`
 const doubanId = '26739551'
 const videoBase = `https://movie.douban.com/trailer/219491`
 
@@ -17,7 +17,7 @@ const sleep = time => new Promise(resolve => {
   })
 
   const page = await browser.newPage()
-  await page.goto(url, {
+  await page.goto(base + doubanId, {
     waitUntil: 'networkidle2'
   })
 
@@ -27,10 +27,16 @@ const sleep = time => new Promise(resolve => {
     var $ = window.$
     var it = $('.related-pic-video')
     var link = it.attr('href')
-
+    var reg = /\((.*)\)/
+    
     if (it && it.length) {
-      var cover = it.find('img').attr('src')
-      var items = $('.list-wp a')
+      var cover = it.attr('style').match(reg)
+
+      if (cover !== null) {
+        cover = cover[1]
+      } else {
+        cover = ""
+      }
 
       return {
         link,
