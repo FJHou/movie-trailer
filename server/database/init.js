@@ -11,6 +11,28 @@ exports.connect = () => {
       mongoose.set('debug', true);
     }
 
-    mongoose.connect(db);
+    mongoose.connect(db, {
+      useMongoClient: true,
+    });
+
+    mongoose.connection.on('disconnected', () => {
+      maxConnctTimes++;
+      
+      if (maxConnctTimes < 5) {
+        mongoose.connect(db);
+      } else {
+        throw new Error('数据库挂了');
+      }
+    });
+    
+    mongoose.connection.on('error', err => {
+      maxConnctTimes++;
+
+      if (maxConnctTimes < 5) {
+        mongoose.connect(db);
+      } else {
+        throw new Error('数据库挂了');
+      }
+    })
   })
 }
