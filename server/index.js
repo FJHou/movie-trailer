@@ -1,13 +1,17 @@
 const Koa = require('koa');
 const views = require('koa-views');
 const { resolve } = require('path');
-const { connect } = require('./database/init');
+const { connect, initSchemas } = require('./database/init');
 
 ;(async () => {
   await connect();
+
+  // initSchemas();
+
+  require('./tasks/movie');
 })();
 
-const PORT = 5000;
+const PORT = 5001;
 
 const app = new Koa();
 
