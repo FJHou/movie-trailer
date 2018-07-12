@@ -1,6 +1,7 @@
 const cp = require('child_process')
 const { resolve } = require('path')
 const mongoose = require('mongoose')
+// console.log(mongoose.model('Movie'))
 const Movie = mongoose.model('Movie')
 
 ;(async () => {

@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 const db = 'mongodb://localhost/movie-trailer';
+const glob = require('glob')
+const { resolve } = require('path')
 
 mongoose.Promise = global.Promise;
+
+exports.initSchemas = () => {
+  glob
+    .sync(resolve(__dirname, './schema', '**/*.js'))
+    .forEach(require);
+}
 
 exports.connect = () => {
   let maxConnctTimes = 0;
